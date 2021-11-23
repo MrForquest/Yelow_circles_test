@@ -4,12 +4,13 @@ from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from design import Ui_MainWindow
 
 
-class Window(QMainWindow):
+class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.setWindowTitle('Рисование')
         self.do_paint = False
         self.pushButton.clicked.connect(self.draw)
@@ -24,7 +25,7 @@ class Window(QMainWindow):
 
     def draw_flag(self, qp):
         side = randint(20, 100)
-        qp.setBrush(QColor("yellow"))
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         qp.drawEllipse(QPoint(randint(200, 600), randint(200, 600)), side, side)
 
     def draw(self):
